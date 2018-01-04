@@ -1,3 +1,7 @@
+# Local Outlier Factor Implementation
+# For more information visit https://en.wikipedia.org/wiki/Local_outlier_factor
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.neighbors import NearestNeighbours
@@ -6,7 +10,7 @@ import statsmodel.api as sm
 import scipy.stats as st
 
 
-
+#Finding distance
 def knn(data, k=20):
 	knn_clf = NearestNeighbours(n_neighbors =k)
 	knn_clf.fit(data)
@@ -14,7 +18,7 @@ def knn(data, k=20):
 
 	return dists, indices
 
-
+#Reachability Distance
 def reachability_distance(data, min_points, knn_dist):
 	distance_min_points, indices_min_point = knn(data, min_points)
 	distance_mat = np.zeros((len(distance_min_points), 3))
@@ -24,20 +28,21 @@ def reachability_distance(data, min_points, knn_dist):
 
 	return distance_mat, indices_min_point
 
-
-def lrd(min_points, knn_dist):
+# Local Reachability Distance
+def LRD(min_points, knn_dist):
 	lrd = min_points/np.sum(knn_dist, axis =1)
 	return lrd
 
+# Local Outlier factor
 def lof(lrd, min_points, data):
-	lof = []
+	lof_anom = []
 	for item in data:
 		temp_lrd = np.divide(lrd[item[1:]], lrd[item[0]])
-		lof.append(temp_lrd.sum()/min_points)
-	return lof
+		lof_anom.append(temp_lrd.sum()/min_points)
+	return lof_anom
 
 
-
+# For directly calculating LOF using SKlearn Library
 def lof_direct(data, k= 20, outlier_ratio = 0.15):
 
 	clf = LocalOutlierFactor(n_neighbors= 20)
