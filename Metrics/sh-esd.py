@@ -1,3 +1,6 @@
+# Implementing Seasonal Hybrid- ESD Algorithm for ANomaly detection
+# Inspired from https://github.com/twitter/AnomalyDetection
+
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -6,12 +9,13 @@ import scipy.stats as st
 import argparse
 import csv
 
+# parsing data input and output file names from command line
 parser = argparse.ArgumentParser(description='Processes the arguments on execution')
 parser.add_argument("--target_dir", default='~/data/', type=str, help="Directory to store the dataset.")
 parser.add_argument("--data_path", type=str, help="Path to the TEDLIUM_release tar if downloaded (Optional).")
 
 
-
+# Seasonal Decomposition. Using the additive model 'TimeSeries = Seasonal + Trend + Noise'
 def stl(data, freq):
 	
 	if freq == None:
@@ -21,14 +25,14 @@ def stl(data, freq):
 	return decomp
 
 
-
+# Z-score
 def test_stat_zscore(data):
 
 	z_scores = abs(st.zscore(data, ddof = 1))
 	max_idx = np.argmax(z_scores)
 	return max_idx, z_scores[max_idx]
 
-
+# Grubb's Test
 def grubbs_stat_limit(data, alpha = 0.6):
 
 	size = len(data)
@@ -53,7 +57,7 @@ def sh_esd(data, seasonality= None , hybrid = False, max_anomalies = 10, alpha =
 	outliers = esd(trend_comp, max_anomalies = max_anomalies, alpha = alpha)
 
 
-
+# Extreme Studentized Deviation
 def esd(data, max_anomalies = 10, alpha = 0.05):
 
 
