@@ -11,7 +11,7 @@ For more details navigate to the respective Directories
 
 ## Testing Models
 
-Data is available for testing anomaly detection algorithm at
+Data used for testing anomaly detection algorithm is available at
 
-1. __Metric data__ : https://github.com/numenta/NAB/tree/master/data
-2. __Logs__ : https://github.com/logpai/loghub
+__Metric__ : https://github.com/numenta/NAB/tree/master/data
+__Logs__ : https://github.com/logpai/loghub
