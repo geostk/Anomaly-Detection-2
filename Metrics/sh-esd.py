@@ -9,8 +9,6 @@ import scipy.stats as st
 import argparse
 import csv
 
-
-
 # Seasonal Decomposition. Using the additive model 'TimeSeries = Seasonal + Trend + Noise'
 def stl(data, freq):
 	
@@ -19,7 +17,6 @@ def stl(data, freq):
 
 	decomp= sm.tsa.seasonal_decompose(data, freq = freq, model = 'additive')
 	return decomp
-
 
 # Z-score
 def test_stat_zscore(data):
@@ -52,10 +49,8 @@ def sh_esd(data, seasonality= None , hybrid = False, max_anomalies = 10, alpha =
 
 	outliers = esd(trend_comp, max_anomalies = max_anomalies, alpha = alpha)
 
-
 # Extreme Studentized Deviation
 def esd(data, max_anomalies = 10, alpha = 0.05):
-
 
 	ts = np.copy(np.array(data))
 	test_stats = []
@@ -72,27 +67,21 @@ def esd(data, max_anomalies = 10, alpha = 0.05):
 	anomaly_indices = test_stats[:total_anomalies+1]
 	return anomaly_indices
 
-
 def main():
 	data_path = args.data_path
 	outlier_path = args.target_dir
 	try:
 		with open(data_path) as f:
 			csv.reader(f, delimiter = ";")
-
 			data = []
 			nb_of_values = 0
-
 			for line in data:
 				try:
 					data.append(float(line[2]))
 					nb_of_values +=1
-
 				except ValueError:
 					pass
 	anomalies = sh_esd(data)
-	
-
 
 if __name__ == '__main__':
 	main()
