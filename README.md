@@ -14,4 +14,5 @@ For more details navigate to the respective Directories
 Data used for testing anomaly detection algorithm is available at
 
 __Metric__ : https://github.com/numenta/NAB/tree/master/data
+
 __Logs__ : https://github.com/logpai/loghub
