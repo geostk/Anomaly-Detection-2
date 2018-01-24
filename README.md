@@ -9,3 +9,9 @@ Repo for Models of Anomaly detection in Logs and Metrics
 
 For more details navigate to the respective Directories
 
+## Testing Models
+
+Data is available for testing anomaly detection algorithm at
+
+1. __Metric data__ : https://github.com/numenta/NAB/tree/master/data
+2. __Logs__ : https://github.com/logpai/loghub
