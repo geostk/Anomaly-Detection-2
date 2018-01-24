@@ -9,10 +9,6 @@ import scipy.stats as st
 import argparse
 import csv
 
-# parsing data input and output file names from command line
-parser = argparse.ArgumentParser(description='Processes the arguments on execution')
-parser.add_argument("--target_dir", default='~/data/', type=str, help="Directory to store the dataset.")
-parser.add_argument("--data_path", type=str, help="Path to the TEDLIUM_release tar if downloaded (Optional).")
 
 
 # Seasonal Decomposition. Using the additive model 'TimeSeries = Seasonal + Trend + Noise'
